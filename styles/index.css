@@ -1,16 +1,28 @@
-* {margin: 0; padding: 0; border: 0; vertical-align: baseline;}
-html {box-sizing: border-box;}
-*, *:before, *:after {box-sizing: inherit;}
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  vertical-align: baseline;
+}
+html {
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
 
-html, body {
-    height: 100%;
-    margin: 0;
-  }
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
 
 body {
   font-family: "Segoe UI", sans-serif;
-  background: #1A2933;
-  color: #FFF;
+  background: #1a2933;
+  color: #fff;
 }
 body {
   border: 1px solid #48545c;
@@ -32,7 +44,7 @@ body {
   -webkit-app-region: drag;
 }
 #titlebar {
-  color: #FFF;
+  color: #fff;
 }
 #titlebar #drag-region {
   display: grid;
@@ -76,24 +88,25 @@ body {
 #window-controls .button {
   user-select: none;
   cursor: default;
-  color: #BBB;
+  color: #bbb;
 }
 #window-controls .button:hover {
-  background: rgba(255,255,255,0.2);
-  color: #FFF;
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
 }
 
-#window-controls #always-on-top-button, #window-controls #restore-button {
+#window-controls #always-on-top-button,
+#window-controls #restore-button {
   grid-column: 1;
 }
 #window-controls #min-button {
-    grid-column: 2;
+  grid-column: 2;
 }
 #window-controls #close-button {
   grid-column: 3;
 }
 #window-controls #close-button:hover {
-  background: #E81123;
+  background: #e81123;
 }
 
 #main {
@@ -104,9 +117,9 @@ body {
 }
 
 #always-on-top-button:hover {
-    background: transparent;
+  background: transparent;
 }
 
 #always-on-top-checkbox {
-    transform: scale(1.5)
+  transform: scale(1.5);
 }
