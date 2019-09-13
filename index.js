@@ -11,7 +11,7 @@ function createWindow() {
   win = new BrowserWindow({
     width: 500,
     height: 600,
-    // frame: false,
+    frame: false,
     webPreferences: {
       nodeIntegration: true
     }
