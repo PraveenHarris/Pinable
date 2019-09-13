@@ -13,18 +13,35 @@ function createWindow() {
     width: 500,
     height: 600,
     webPreferences: {
-      nodeIntegration: false,
-      plugins: true
+      nodeIntegration: true
     }
   })
 
-
-  win.loadURL(url.format({
-    pathname: 'path to file',
-    protocol: 'file:',
-    // slashes: true
-  }))
+  win.loadFile('index.html')
 }
+
+ipcMain.on("openable", (e, a) => {
+  if (a == true) {
+    dialog.showOpenDialog({
+      properties: ['openFile']
+    }, (file) => {
+      if (file != undefined) {
+        win = new BrowserWindow({
+          width: 500,
+          height: 600,
+          webPreferences: {
+            nodeIntegration: false,
+            plugins: true
+          }
+        })
+      
+  win.webContents.openDevTools()
+  win.loadURL(file[0])
+
+      }
+    })
+  }
+});
 
 ipcMain.on("always-on-top-message", (e, a) => {
   win.setAlwaysOnTop(a);
