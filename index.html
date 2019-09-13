@@ -35,14 +35,24 @@
     </header>
 
     <div id="main">
-      Hello World!
+      <p id="openable">
+        Open Fille...
+      </p>
     </div>
 
     <script>
+      
+    const { ipcRenderer } = require("electron");
+
+     document
+        .querySelector("#openable")
+        .addEventListener("click", () => {
+          ipcRenderer.send("openable", true);
+        });
+
       document
         .querySelector("#always-on-top-checkbox")
         .addEventListener("change", () => {
-          const { ipcRenderer } = require("electron");
           var value = document.querySelector("#always-on-top-checkbox").checked;
           console.log(value);
 

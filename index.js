@@ -1,5 +1,6 @@
 const path = require("path");
-const { app, BrowserWindow, ipcMain } = require("electron");
+const url = require('url')
+const { app, BrowserWindow, ipcMain, dialog } = require("electron");
 
 require("electron-reload")(__dirname, {
   electron: path.join(__dirname, "node_modules/.bin/electron.cmd")
@@ -11,13 +12,18 @@ function createWindow() {
   win = new BrowserWindow({
     width: 500,
     height: 600,
-    frame: false,
     webPreferences: {
-      nodeIntegration: true
+      nodeIntegration: false,
+      plugins: true
     }
-  });
+  })
 
-  win.loadFile("index.html");
+
+  win.loadURL(url.format({
+    pathname: 'path to file',
+    protocol: 'file:',
+    // slashes: true
+  }))
 }
 
 ipcMain.on("always-on-top-message", (e, a) => {
