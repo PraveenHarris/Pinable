@@ -6,21 +6,27 @@ require("electron-reload")(__dirname, {
   electron: path.join(__dirname, "node_modules/.bin/electron.cmd")
 });
 
-var win;
+// Global variables
+var WIN;
+var ALWAYS_ON_TOP = false;
 
 function createWindow() {
-  win = new BrowserWindow({
+  WIN = new BrowserWindow({
     width: 500,
     height: 600,
     webPreferences: {
-      nodeIntegration: true
+      nodeIntegration: true,
+      plugins: true
     }
   });
 
-  win.loadFile("index.html");
+  WIN.loadFile("index.html");
 }
 
 ipcMain.on("openable", (e, a) => {
+  
+  WIN.setAlwaysOnTop(false);
+
   if (a == true) {
     dialog.showOpenDialog(
       {
@@ -28,17 +34,10 @@ ipcMain.on("openable", (e, a) => {
       },
       file => {
         if (file != undefined) {
-          win = new BrowserWindow({
-            width: 500,
-            height: 600,
-            webPreferences: {
-              nodeIntegration: false,
-              plugins: true
-            }
-          });
 
-          win.webContents.openDevTools();
-          win.loadURL(file[0]);
+          // WIN.webContents.openDevTools();
+          WIN.loadURL(file[0]);
+          WIN.setAlwaysOnTop(ALWAYS_ON_TOP);
         }
       }
     );
@@ -46,7 +45,8 @@ ipcMain.on("openable", (e, a) => {
 });
 
 ipcMain.on("always-on-top-message", (e, a) => {
-  win.setAlwaysOnTop(a);
+  ALWAYS_ON_TOP = a;
+  WIN.setAlwaysOnTop(ALWAYS_ON_TOP);
 });
 
 app.on("ready", createWindow);
