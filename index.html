@@ -41,14 +41,11 @@
     </div>
 
     <script>
-      
-    const { ipcRenderer } = require("electron");
+      const { ipcRenderer } = require("electron");
 
-     document
-        .querySelector("#openable")
-        .addEventListener("click", () => {
-          ipcRenderer.send("openable", true);
-        });
+      document.querySelector("#openable").addEventListener("click", () => {
+        ipcRenderer.send("openable", true);
+      });
 
       document
         .querySelector("#always-on-top-checkbox")

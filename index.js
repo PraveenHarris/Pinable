@@ -1,5 +1,5 @@
 const path = require("path");
-const url = require('url')
+const url = require("url");
 const { app, BrowserWindow, ipcMain, dialog } = require("electron");
 
 require("electron-reload")(__dirname, {
@@ -15,31 +15,33 @@ function createWindow() {
     webPreferences: {
       nodeIntegration: true
     }
-  })
+  });
 
-  win.loadFile('index.html')
+  win.loadFile("index.html");
 }
 
 ipcMain.on("openable", (e, a) => {
   if (a == true) {
-    dialog.showOpenDialog({
-      properties: ['openFile']
-    }, (file) => {
-      if (file != undefined) {
-        win = new BrowserWindow({
-          width: 500,
-          height: 600,
-          webPreferences: {
-            nodeIntegration: false,
-            plugins: true
-          }
-        })
-      
-  win.webContents.openDevTools()
-  win.loadURL(file[0])
+    dialog.showOpenDialog(
+      {
+        properties: ["openFile"]
+      },
+      file => {
+        if (file != undefined) {
+          win = new BrowserWindow({
+            width: 500,
+            height: 600,
+            webPreferences: {
+              nodeIntegration: false,
+              plugins: true
+            }
+          });
 
+          win.webContents.openDevTools();
+          win.loadURL(file[0]);
+        }
       }
-    })
+    );
   }
 });
 
